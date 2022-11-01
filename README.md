@@ -6,7 +6,7 @@ Predicting the sale of different types of products sold in Favorita stores (Ecua
 Carlos Rojas
 
 ## Term: 
-Spring 2022
+Fall 2022
 
 ## Team Number: 
 10
