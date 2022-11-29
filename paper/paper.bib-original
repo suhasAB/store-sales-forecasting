@@ -8,5 +8,3 @@
   year={2000},
   publisher={American Association for the Advancement of Science}
 }
-
-@misc{kaggle, title={Store sales - time series forecasting}, url={https://www.kaggle.com/competitions/store-sales-time-series-forecasting}, journal={Kaggle}} 
