@@ -1,6 +1,7 @@
+
 ---
-title: Store Sales Forcast with Machine Learning
-date: "November 2021"
+title: LiBerTY -- Store Sales Forcast with Machine Learning
+date: "November 2022"
 author:
   - Suhas Anand Balagar^[San José State University, \texttt{suhasAB@github}]
   - Hardy Leung^[San José State University, \texttt{ksleung@github}]
@@ -14,9 +15,12 @@ header-includes: |
 
 # Abstract
 
-Pizza [@pizza2000identification] is an understudied yet widely utilized implement for delivering in-vivo *Solanum lycopersicum* based liquid mediums in a variety of next-generation mastications studies. Here we describe a de novo approach for large scale *T. aestivum* assemblies based on protein folding that drastically reduces the generation time of the mutation rate.
+LiBerTY is an ensemble regression engine to predict the store sales
+given. It employed a variety of data engineering and machine learning
+techniques to most 
 
-# Introduction
+# Introduction[^1]
+[^1]: Suhas's section
 
 The ability to predict the sales of a variety of stores is highly sought
 out in supply chain logistics, as it finds applications in increasing
@@ -42,7 +46,33 @@ We plan on using different Supervised Learning models to predict
 the prices and then evaluate which of those models give out the best
 results. Supervised learning approach works best in this case, as we
 have huge time series data of both input and the output parameters
-mentioned above. Few of the supervised learning options we can consider are
+mentioned above. We applied several transformation and optimization to
+improve the data quality in preparation for the optimization.
+To seek the best store sales prediction, We have evaluated 
+several models including linear regression, 
+Gradient Boost (XGBoost), Light GBM,
+Random Forest, Support Vector Regression (SVR),
+and Long Short-Term Memory (LSTM). We found XGBoost to be the best-
+performing individual method, and focused on hyper-parameter tuning
+via grid search. We further employed ensemble prediction to further
+improve our results, achieving a notable RMSLE score of 0.425 within our
+compressed project time-frame.
+
+# Related Work[^2]
+[^2]: Hardy's section, and others
+
+Cite reference to these models.
+
+XGBoost 
+[@Chen:2016:XST:2939672.2939785]
+is a popular open-source software library which provides a gradient
+boosting framework for C++, Java, Python, R, Julia, Perl, and Scala.
+
+LightGBM [@NIPS2017_6449f44a]
+is a gradient boosting decision tree (GBDT) implemented by Microsoft which
+focused on speeding up the training process of conventional 
+GBDT by up to 20X while achieving almost the same accuracy. The huge
+runtime efficiency makes it a popular GBDT technique in recent years.
 
 - Linear Regression
 - Gradient Boost(XGBoost)
@@ -50,23 +80,47 @@ mentioned above. Few of the supervised learning options we can consider are
 - Support Vector Machine(SVM) /Support Vector Regression (SVR)
 - Long Short-Term Memory (LSTM)
 
-Once the models are trained on training data and developed,
-we can evaluate the performance of these models on the test dataset.
+# Data Preparation[^3]
 
-# Methods
+[^3]:Hardy's section
 
-Here we talk about the methods.
+# Experimental Setup[^4]
 
-# Models
+[^4]: Hardy's section
 
-Here we talk about the comparison.
+Talk about the experimental setup, including how to 
 
-# Analysis
+## Part I[^5]
+[^5]: Loukya's section
 
-Here we talk about the analysis.
+- Linear regression
+- XGBoost
+- LightGBM
+- Grid search technique to improve XGBoost performance
 
-# Conclusions
+## Part II[^6]
+[^6]: Cody's section
 
-Here we talk about the conclusion.
+- LSTM, architecture, slightly different flow
+
+## Part III[^7]
+[^7]: Suhas's section
+
+- Ensemble approach. You can quote this [@rokach2010ensemble]
+- Final result
+- Visualization
+
+# Discussion[^8]
+[^8]: TBD
+
+- Possible enhancements
+
+# Conclusions[^9]
+[^9]: Hardy
+
+In this work, we have presented LiBerTY, an ensemble regression engine
+that successfully predicts the store sales, which successfully
+employed a variety of data
+engineering and machine learning techniques.
 
 # References
