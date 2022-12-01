@@ -118,7 +118,7 @@ have a tremendous impact on the accuracy of our prediction, and hence must be
 considered.
 
 <figure style='width:100%'>
-![](oil.pdf)
+![](images/oil.pdf)
 <figcaption align = "center">
 	<b>\phantom{....}Fig-1: Oil price over time</b>
 </figcaption>
@@ -136,7 +136,7 @@ degrade the quality of our regressors if they were to be trained on such
 undesirable data.
 
 <figure style='width:100%'>
-![](sales_missing.pdf)
+![](images/sales_missing.pdf)
 <figcaption align = "center">
 	<b>\phantom{....}Fig-2: Aggregate sales price over time (original)</b>
 </figcaption>
@@ -158,7 +158,7 @@ time after the inpainting. Note that the range of sales become much
 smoother.
 
 <figure style='width:100%'>
-![](sales_filled.pdf)
+![](images/sales_filled.pdf)
 <figcaption align = "center">
 	<b>\phantom{....}Fig-3: Aggregate sales price over time (inpainted)</b>
 </figcaption>
@@ -177,16 +177,48 @@ establish the correlations between different input and output parameters
 such as holiday events, oil prices, transactions per store type,
 dates of salary, natural calamities etc.
 
+Furthermore, we transformed the sales values logarithmically via
+\texttt{log1p()}, i.e. $f(x) = \log (x+1)$. This is due to the highly
+non-linear nature of sales (similar to how stock price movement is better
+modeled geometrically), and as such we believe it is easier for the models
+to optimize on the logarithm of sales rather than sales. Of course, we
+shall invert the transformation after prediction.
+
 At this point, we can think of the training data as a list of observations
 $X_i$, where $1 \leq i \leq 3008016$. Each observation is keyed
 by [\texttt{store}, \texttt{family}], and is accompanied by a total of $K$
-features, $X_{i,1}, $X_{i,1}, \dots, $X_{i,K}$. Note that we include
+features, $X_{i,1}, X_{i,1}, \dots, X_{i,K}$. Note that we include
 among these features the most recent $S$ (defaulted to 20) past sales,
 which we called lagging sales. This transformed and cleaned dataset is
 then passed to the regressors to obtain the prediction.
 
-# Experimental Setup[^4]
-[^4]: Hardy's section
+
+# Methods
+
+In this section we'll briefly discuss our approach. First, we have considered
+several different prediction engines that work well with time-series
+analysis -- linear regression, LightGBM [@NIPS2017_6449f44a],
+XGBoost [@Chen:2016:XST:2939672.2939785],
+Random Forest, [@598994], SVR, and LSTM.
+
+
+We split the dataset, made of 3008016 observations, into a training
+set $X_\texttt{train}, y_\texttt{train}$, and a validation set
+$X_\texttt{val}, y_\texttt{val}$ at a 80:20 split after randomization.
+The missing data inpainting allows the entire collection of observations to
+be used, without suffering from poor data quality due to missing data.
+Each model is trained on the training set, but evaluated on the validation
+set which the models do not train on.
+
+We found that XGBoost offers superior performance over other engines.
+We then perform a grid search to further fine-tune the model for even
+better performance. We were resource-limited and therefore not able to
+conduct a more complex hyper-parameter tuning that may give us further benefit.
+
+Finally, we adopt the ensemble learning approach [@rokach2010ensemble]
+to further improve the
+performance of our model. Our results will be detailed in the next section.
+
 
 Talk about the experimental setup, including how to 
 
