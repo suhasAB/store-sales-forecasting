@@ -197,6 +197,7 @@ Talk about the experimental setup, including how to
 - XGBoost
 - LightGBM
 - Grid search technique to improve XGBoost performance
+- CatBoost
 
 ## Part II[^6]
 [^6]: Cody's section
