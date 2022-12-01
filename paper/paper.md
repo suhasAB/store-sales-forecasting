@@ -111,21 +111,79 @@ dataset were still in business as of August 15th, 2017,
 After properly dealing with missing data, Christmas, and
 stores that were yet to open, we would have a dataset made of
 $(\text{\#days}) \times (\text{\#stores}) \times (\text{\#families)} = 1688 \times 54 \times 33 = 3008016$ numbers.
-We were also given the daily oil price over the same period of time, as well
+We were also given the daily oil price over the same period of time (shown
+in Fig-1), as well
 as the dates of the regional or national holidays. These information  could
 have a tremendous impact on the accuracy of our prediction, and hence must be
 considered.
 
+<figure style='width:100%'>
+![](oil.pdf)
+<figcaption align = "center">
+	<b>\phantom{....}Fig-1: Oil price over time</b>
+</figcaption>
+</figure>
+
 Our job is to predict the sales figures for each store between August 16th,
 2017 and August 31st, 2017, inclusive.
 
-The preprocessing of data will include checking for missing values and
-if found, imputing them so that no data is disregarded.
+Due to the large amount of missing data in certain stores, or certain
+product families within a store, we could decide to treat those days
+as zero sales, in which the seasonality and trend could be severely
+compromised if we were to use the entire range of data. Figure 2 shows
+what the aggregate sales look like. It would confuse and possibly severely
+degrade the quality of our regressors if they were to be trained on such
+undesirable data.
+
+<figure style='width:100%'>
+![](sales_missing.pdf)
+<figcaption align = "center">
+	<b>\phantom{....}Fig-2: Aggregate sales price over time (original)</b>
+</figcaption>
+</figure>
+
+Alternatively, one
+can choose to ignore data that were too old. However, this approach is
+too conservative, because some stores may not have complete data until
+late, and we would be forced to trim the dataset to the tune of the worst
+offender. This approach seriously limit our datasize.
+
+Instead, we propose to "inpaint" the sales figure using patches of data
+from either a year ago or a year later (take the average if both
+are available). Note that this does create a theoretical possibility of
+a leakage problem since the missing data in the training set
+may be inpainted from dates in the validation set. We believe this
+issue is negligible, if at all. Figure 3 shows the aggregate sales over
+time after the inpainting. Note that the range of sales become much
+smoother.
+
+<figure style='width:100%'>
+![](sales_filled.pdf)
+<figcaption align = "center">
+	<b>\phantom{....}Fig-3: Aggregate sales price over time (inpainted)</b>
+</figcaption>
+</figure>
+
+In addition, we have performed a few standard data engineering techniques,
+including one-hot encoding of categorical attributes, standardization of
+certain attributes such as oil price, as well as generation of derived
+features such as \texttt{day-of-year},
+\texttt{month-of-year}, \texttt{week-of-year}, \texttt{day-of-week},
+\texttt{is-holiday}, and so on.
+
 We have also checked for frequency distribution of data elements as part
-of Data exploration. We have calculated and plotted correlation mapping to
+of data exploration. We have calculated and plotted correlation mapping to
 establish the correlations between different input and output parameters
 such as holiday events, oil prices, transactions per store type,
 dates of salary, natural calamities etc.
+
+At this point, we can think of the training data as a list of observations
+$X_i$, where $1 \leq i \leq 3008016$. Each observation is keyed
+by [\texttt{store}, \texttt{family}], and is accompanied by a total of $K$
+features, $X_{i,1}, $X_{i,1}, \dots, $X_{i,K}$. Note that we include
+among these features the most recent $S$ (defaulted to 20) past sales,
+which we called lagging sales. This transformed and cleaned dataset is
+then passed to the regressors to obtain the prediction.
 
 # Experimental Setup[^4]
 [^4]: Hardy's section
@@ -155,10 +213,16 @@ Talk about the experimental setup, including how to
 # Discussion[^8]
 [^8]: TBD
 
-- Possible enhancements
+# Future Work[^9]
+[^9]: TBD
 
-# Conclusions[^9]
-[^9]: Hardy
+- Note that we do not take into consideration the interaction between
+different stores and product families.
+
+- Principle Component Analysis to reduce datasize
+
+# Conclusions[^10]
+[^10]: Hardy
 
 In this work, we have presented LiBerTY, an ensemble regression engine
 that successfully predicts the store sales, which successfully
