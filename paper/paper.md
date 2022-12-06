@@ -250,10 +250,14 @@ runtime, and hence were only able to offer qualitative commentaries.
 We first focused on XGBoost due to its good performance. However, we
 were not able to meaningfully perform hyper-parameter tuning due to its
 relatively slow runtime. The error, more officially the
-root-mean-square log-error (RMSLE), is as follows:
+root-mean-square log-error (RMSLE), is as follows[^2]:
 
-| \texttt{\phantom{xxxx}XGBoost | Training   0.401}[^2]
-| \texttt{\phantom{xxxx}XGBoost | Validation 0.403}
+````{verbatim}
+      Model  |      RMSLE
+    ---------+------------------
+     XGBoost |   Training 0.401
+     XGBoost | Validation 0.403
+````
 
 [^2]: Our apology for the poorly rendered tables. The pandoc template
 had a bug and failed miserably in creating even basic Markdown tables.
@@ -269,8 +273,12 @@ the best hyper-parameters may be outside of the search box. With the
 hyper-parameter tuning, CatBoost was able to achieve a better result
 than XGBoost in its default setting:
 
-| \texttt{\phantom{xxxx}CatBoost | Training   0.338}
-| \texttt{\phantom{xxxx}CatBoost | Validation 0.357}
+````{verbatim}
+       Model  |      RMSLE
+    ----------+------------------
+     CatBoost |   Training 0.338
+     CatBoost | Validation 0.357
+````
 
 ## 5.2 LSTM
 
@@ -311,22 +319,28 @@ the models to increase the accuracy of prediction.
 In our experiment, our ensemble includes Ridge, random forest, XGBoost, 
 and SVR. Our results are as follows:
 
-| \texttt{\phantom{xxxx}Random Forest | Training   0.445}
-| \texttt{\phantom{xxxx}Random Forest | Validation 0.454}
-
-| \texttt{\phantom{xxxx}Ensemble | Training   0.421}
-| \texttt{\phantom{xxxx}Ensemble | Validation 0.411}
+````{verbatim}
+         Model     |      RMSLE
+    ---------------+------------------
+     Random Forest |   Training 0.445
+     Random Forest | Validation 0.454
+          Ensemble |   Training 0.421
+          Ensemble | Validation 0.411
+````
 
 All in all, we believe we did a reasonable job with all our models.
 We did, after all experiments were done, submit the result to Kaggle,
 and the results are as follows:
 
-| \texttt{\phantom{xxxxxxxxxxxxx} | Validation | Kaggle }
-| \texttt{\phantom{xxxxxx}XGBoost |   0.403    | 0.440 }
-| \texttt{\phantom{xxxxx}CatBoost |   0.357    | 0.570 }
-| \texttt{\phantom{}Random Forest |   0.454    | 0.432 }
-| \texttt{\phantom{xxxxx}Ensemble |   0.411    | 0.405 }
-| \texttt{\phantom{xxxxx}LSTM |   0.411    | 0.870 }
+````{verbatim}
+         Model     | Validation | Kaggle 
+    ---------------+------------+--------
+           XGBoost |   0.403    | 0.440
+          CatBoost |   0.357    | 0.570
+     Random Forest |   0.454    | 0.432
+          Ensemble |   0.411    | 0.405
+              LSTM |            | 0.870
+````
 
 It is interesting that CatBoost, which performed the best, failed to
 perform in the Kaggle testset. We believe this can be partially explained
