@@ -204,7 +204,7 @@ Random Forest, [@598994], SVR, and LSTM.
 
 We split the dataset, made of 3008016 observations, into a training
 set $X_\texttt{train}, y_\texttt{train}$, and a validation set
-$X_\texttt{val}, y_\texttt{val}$ at a 80:20 split after randomization.
+$X_\texttt{val}, y_\texttt{val}$ at a 75:25 split after randomization.
 The missing data inpainting allows the entire collection of observations to
 be used, without suffering from poor data quality due to missing data.
 Each model is trained on the training set, but evaluated on the validation
@@ -243,8 +243,18 @@ Talk about the experimental setup, including how to
 - Final result
 - Visualization
 
-# Discussion[^8]
+# Comparison[^8]
 [^8]: TBD
+
+We believe we have achieved encouraging results, despite not ranking
+among the top 100 in the Kaggle competition. Due to the fact that this
+is an unranked competition, there are a significant amount of code sharing.
+In fact, 16 out of the top 25 submissions were \it{identical}, since
+the complete source code was publicly shared and easily reproduced. Moreover,
+we observed a significant amount of cherry picking, as multiple submissions
+were allowed and the top submission was used to rank the entries. This
+contrasts greatly with real-life scenario 
+
 
 # Future Work[^9]
 [^9]: TBD
