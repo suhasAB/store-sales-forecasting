@@ -28,9 +28,10 @@ We plan on using different Supervised Learning models to predict the prices and 
 Few of the supervised learning options we can consider are <br>
 - Linear Regression
 - Gradient Boost(XGBoost)
-- Random Forest
+- Random Forest (RF)
 - Support Vector Machine(SVM) /Support Vector Regression (SVR)
 - Long Short-Term Memory (LSTM)
+- Ensemble Regression by combining XGBoost, RF, Ridge and SVR models
 
 <br>
 Once the models are trained on training data and developed, we can evaluate the performance of these models on the test dataset.
