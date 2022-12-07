@@ -445,7 +445,7 @@ performed very well. Most importantly, it is robust and what we
 learned is generalizable to other problems that we may encounter in the
 future.
 
-# 5 Discussion
+# 6 Conclusion
 
 In this paper, we presented LiBerTY, an ensemble regression engine which
 incorporated a variety of data engineering and machine learning techniques
